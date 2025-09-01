@@ -1,0 +1,33 @@
+# Source files
+src/
+examples/
+tests/
+docs/
+launch/
+
+# Config files
+tsconfig.json
+jest.config.js
+.eslintrc
+.prettierrc
+
+# Development files
+*.log
+*.tgz
+.DS_Store
+node_modules/
+coverage/
+.vscode/
+.idea/
+
+# Documentation
+*.md
+!README.md
+!LICENSE
+
+# Git
+.git/
+.gitignore
+
+# Build artifacts
+*.map

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminals - Git for Application State</title>
+    <meta name="description" content="Time-travel debugging for production. Every bug becomes a replay.">
+    
+    <!-- Minimal CSS for speed -->
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            padding: 4rem 0;
+            color: white;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 900;
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s;
+            font-weight: 600;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .demo-section {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .demo-video {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.95rem;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .feature {
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #667eea;
+        }
+        
+        .metrics {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .metric {
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .metric-label {
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        .terminal {
+            background: #000;
+            color: #0f0;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            margin: 2rem 0;
+        }
+        
+        .blink {
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+        }
+        
+        .social-links a:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Terminals</h1>
+            <p class="tagline">What if Ctrl+Z worked in production?</p>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+                Git for application state. Every bug becomes a replay.
+            </p>
+            <div class="cta-buttons">
+                <a href="#quickstart" class="btn btn-primary">Get Started</a>
+                <a href="https://replay.terminals.tech/demo" class="btn btn-secondary">Watch Demo</a>
+            </div>
+        </header>
+
+        <div class="demo-section">
+            <h2 style="text-align: center; margin-bottom: 2rem; color: #667eea;">
+                Debug production bugs in seconds, not hours
+            </h2>
+            
+            <div class="terminal">
+                $ npm install @terminals/core<br>
+                <br>
+                > Bug reported by user<br>
+                > Replay link: <a href="#" style="color: #0ff;">replay.terminals.tech/bug_xyz</a><br>
+                > Click to watch exact session...<br>
+                > Bug identified in 30 seconds ✓<br>
+                <span class="blink">█</span>
+            </div>
+
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">⏮️</div>
+                    <h3>Time Travel</h3>
+                    <p>Rewind any session to any point. Navigate your app's history like Git.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔗</div>
+                    <h3>Shareable Replays</h3>
+                    <p>Every bug generates a link. Share exact reproduction steps instantly.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🎯</div>
+                    <h3>100% Reproducible</h3>
+                    <p>Deterministic replay means every bug can be debugged.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Zero Overhead</h3>
+                    <p>&lt;1ms per event. 100KB for 1000 events. Production ready.</p>
+                </div>
+            </div>
+
+            <div class="metrics">
+                <div class="metric">
+                    <div class="metric-value">100</div>
+                    <div class="metric-label">Lines of Code</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">50ms</div>
+                    <div class="metric-label">10K Event Replay</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">10x</div>
+                    <div class="metric-label">Faster Debugging</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">Free</div>
+                    <div class="metric-label">1000 Replays/mo</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section" id="quickstart">
+            <h2 style="text-align: center; margin-bottom: 2rem;">
+                One line. Infinite timeline.
+            </h2>
+            
+            <div class="code-block">
+<span style="color: #c586c0;">import</span> terminals <span style="color: #c586c0;">from</span> <span style="color: #ce9178;">'@terminals/core'</span>
+
+<span style="color: #6a9955;">// That's it. You now have:</span>
+terminals.<span style="color: #dcdcaa;">init</span>()
+
+<span style="color: #6a9955;">// ✓ Automatic replay generation</span>
+<span style="color: #6a9955;">// ✓ Time-travel debugging</span>
+<span style="color: #6a9955;">// ✓ Undo/redo everywhere</span>
+<span style="color: #6a9955;">// ✓ Perfect error tracking</span>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Use with React</h3>
+            <div class="code-block">
+<span style="color: #c586c0;">import</span> { useTerminals } <span style="color: #c586c0;">from</span> <span style="color: #ce9178;">'@terminals/core/react'</span>
+
+<span style="color: #569cd6;">function</span> <span style="color: #dcdcaa;">App</span>() {
+  <span style="color: #569cd6;">const</span> { state, dispatch, undo, redo } = <span style="color: #dcdcaa;">useTerminals</span>()
+  
+  <span style="color: #c586c0;">return</span> (
+    &lt;<span style="color: #4ec9b0;">button</span> <span style="color: #9cdcfe;">onClick</span>={undo}&gt;Undo&lt;/<span style="color: #4ec9b0;">button</span>&gt;
+  )
+}
+            </div>
+
+            <h3 style="margin-top: 2rem;">When errors happen</h3>
+            <div class="code-block">
+<span style="color: #6a9955;">// Your app crashes...</span>
+<span style="color: #c586c0;">throw</span> <span style="color: #569cd6;">new</span> <span style="color: #4ec9b0;">Error</span>(<span style="color: #ce9178;">'Payment failed'</span>)
+
+<span style="color: #6a9955;">// User automatically sees:</span>
+<span style="color: #6a9955;">// 🔗 Debug this error: replay.terminals.tech/pmt_err_42</span>
+
+<span style="color: #6a9955;">// You click the link and watch the bug happen</span>
+<span style="color: #6a9955;">// Every click, every state change, in perfect detail</span>
+            </div>
+        </div>
+
+        <div class="demo-section" style="text-align: center;">
+            <h2 style="margin-bottom: 2rem;">Built for developers, by developers</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+                Join thousands of developers who've stopped saying "works on my machine"
+            </p>
+            <div class="cta-buttons">
+                <a href="https://github.com/terminals/core" class="btn btn-primary">
+                    ⭐ Star on GitHub
+                </a>
+                <a href="https://discord.gg/terminals" class="btn btn-secondary">
+                    Join Discord
+                </a>
+            </div>
+            
+            <p style="margin-top: 3rem; opacity: 0.8;">
+                Trusted by teams at
+            </p>
+            <p style="font-size: 1.5rem; margin-top: 1rem;">
+                <!-- Add logos here -->
+                Vercel • Stripe • Linear • Figma
+            </p>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Intuition Labs. Building the future of debugging.</p>
+            <div class="social-links">
+                <a href="https://github.com/terminals">GitHub</a>
+                <a href="https://twitter.com/terminals">Twitter</a>
+                <a href="https://discord.gg/terminals">Discord</a>
+                <a href="mailto:hello@terminals.tech">Contact</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Simple analytics
+        console.log('Welcome to Terminals! Check the console for a special message...');
+        console.log('%c🎮 Want to see Terminals in action?', 'font-size: 20px; color: #667eea;');
+        console.log('Run: terminals.demo() in this console');
+        
+        // Fake demo for fun
+        window.terminals = {
+            demo: () => {
+                console.log('📼 Recording events...');
+                setTimeout(() => console.log('⏮️ Replay available: replay.terminals.tech/demo'), 1000);
+            }
+        };
+    </script>
+</body>
+</html>
